@@ -16,17 +16,17 @@ The model uses historical construction data from Husgruppen's previous projects.
 Note: The actual dataset cannot be shared publicly as it contains confidential business information.
 
 ## Feature Exploration
-We began by analyzing the construction dataset in our [Feature_exploration.ipynb](https://github.com/apriliakeziaa/MLProject/blob/main/Feature_exploration.ipynb) notebook, examining the distribution of various building specifications and their relationships with final construction costs.
+We began by analyzing the construction dataset in our [Feature_Exploration.ipnyb](https://github.com/apriliakeziaa/MLProject/blob/main/Feature_Exploration.ipynb) notebook, examining the distribution of various building specifications and their relationships with final construction costs.
 
 ## Data Preprocessing
 Data Preprocessing included:
 - Feature normalization using MinMaxScaler
-- Data augmentation ([data_augmentation (1). ipnyb](https://github.com/apriliakeziaa/MLProject/blob/main/data_augmentation%20(1).ipynb)). We apply noise addition data augmentation to create synthetic data points
+- Data augmentation ([Data_Augmentation.ipnyb](https://github.com/apriliakeziaa/MLProject/blob/main/Data_Augmentation.ipynb). We apply noise addition data augmentation to create synthetic data points
 
 ## Model Evaluation
 We experimented with multiple algorithms including Linear Regression, Multilayer Perceptron neural networks, and XGBoost gradient boosting to identify the optimal cost prediction model. After comparative analysis, **the linear regression model was selected for its combination of strong performance and high interpretability**—a crucial factor for Husgruppen's stakeholders. The model was trained on augmented data with careful normalization and validation to ensure reliable cost predictions across different building specifications.
 
 ## Results and Evaluation
-Linear Regression emerged as the best-performing model, providing a balance of accuracy and interpretability for construction cost estimation. **We evaluated the model using R-squared and Mean Absolute Error (MAE) metrics, achieving 81.82% of predictions within the calculated confidence interval.** For an interactive demonstration of the model's performance across different building specifications, you can download and open [DEMO(1).html](https://github.com/apriliakeziaa/MLProject/blob/main/DEMO%20(1).html) to see the estimator in action.
+Linear Regression emerged as the best-performing model, providing a balance of accuracy and interpretability for construction cost estimation. **We evaluated the model using R-squared and Mean Absolute Error (MAE) metrics, achieving 81.82% of predictions within the calculated confidence interval.** For an interactive demonstration of the model's performance across different building specifications, you can download and open [Demo.html](https://github.com/apriliakeziaa/MLProject/blob/main/Demo.html) to see the estimator in action.
 
 
