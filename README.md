@@ -31,7 +31,11 @@ Linear Regression emerged as the best-performing model, providing a balance of a
 
 ## Contributors:
 -Eduardo Pereira
+
 -Kezia Aprilia Sanjaya
+
 -Juan Carlos Gonzalez
+
 -M. Malik
+
 -Julian Emery
