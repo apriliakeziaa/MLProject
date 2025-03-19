@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Cost Predictor</title>
+    <style>
+        :root {
+            --defaultFontStack: "One Montserrat", "Helvetica Neue", Helvetica, sans-serif;
+            --colorBlack: #000;
+            --colorWhite: #fff;
+            --colorGray_2b: #2b2b2b;
+            --colorGray_33: #333;
+            --colorGray_3c: #3c3c3c;
+            --colorGray_ce: #cecece;
+            --colorGray_97: #f7f7f7;
+            --colorBlack_a10: rgba(0, 0, 0, 0.1);
+            --colorBlack_a20: rgba(0, 0, 0, 0.2);
+            --colorGold: #d4b778;
+        }
+        
+        *, ::before, ::after {
+            box-sizing: inherit;
+            word-wrap: inherit;
+        }
+        
+        html {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--defaultFontStack);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+            color: var(--colorGray_33);
+        }
+        
+        /* Header styles */
+        .header {
+            background-color: #222;
+            color: white;
+            padding: 20px 0;
+            width: 100%;
+        }
+        
+        .header-container {
+            width: 1050px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: auto;
+            width: 130px;
+        }
+        
+        .logo-text {
+            font-weight: bold;
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.2;
+        }
+        
+        .logo-subtext {
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-item {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .nav-item.active {
+            color: var(--colorGold);
+        }
+        
+        .nav-item:hover {
+            color: var(--colorGold);
+        }
+        
+        .dropdown-icon {
+            margin-left: 5px;
+        }
+        
+        .container {
+            width: 1050px;
+            min-height: 126px;
+            margin: 40px auto;
+            clear: both;
+            position: relative;
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--colorGray_2b);
+            margin: 0 0 30px;
+            padding: 0;
+            font-weight: 600;
+        }
+        
+        .form-container {
+            background-color: var(--colorGray_33);
+            padding: 30px;
+            box-shadow: 0 2px 10px var(--colorBlack_a10);
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--colorGray_ce);
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--colorGray_ce);
+            border-radius: 0;
+            font-family: var(--defaultFontStack);
+            font-size: 16px;
+            transition: border-color 0.2s ease;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--colorGray_3c);
+        }
+        
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--colorGray_ce);
+            border-radius: 0;
+            font-family: var(--defaultFontStack);
+            font-size: 16px;
+            background-color: var(--colorWhite);
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px top 50%;
+            background-size: 12px auto;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: var(--colorGray_3c);
+        }
+        
+        button {
+            background-color: var(--colorWhite);
+            color: var(--colorGray_2b);
+            padding: 15px 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            width: 100%;
+            transition: background-color 0.2s ease;
+            font-family: var(--defaultFontStack);
+        }
+        
+        button:hover {
+            background-color: var(--colorGray_ce);
+        }
+        
+        #result {
+            margin-top: 25px;
+            margin-bottom: 10px;
+            padding: 20px;
+            background-color: var(--colorGold);
+            text-align: center;
+            font-size: 18px;
+            display: none;
+            border-left: 4px solid var(--colorGray_3c);
+        }
+        
+        .result-visible {
+            display: block !important;
+        }
+        
+        /* Feature grid styles */
+        .intro-text {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 18px;
+            color: var(--colorGray_3c);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        h2 {
+            text-align: center;
+            color: var(--colorGray_2b);
+            margin: 40px 0 30px;
+            font-weight: 600;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+        
+        .feature-item {
+            background-color: var(--colorWhite);
+            box-shadow: 0 2px 10px var(--colorBlack_a10);
+            overflow: hidden;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .feature-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .feature-item h3 {
+            padding: 15px 20px 5px;
+            font-size: 20px;
+            color: var(--colorGray_2b);
+            margin: 0;
+        }
+        
+        .feature-item p {
+            padding: 0 20px 20px;
+            color: var(--colorGray_3c);
+            line-height: 1.5;
+            margin: 10px 0 0;
+        }
+        
+        @media (max-width: 1100px) {
+            .container, .header-container {
+                width: 95%;
+                padding: 0 15px;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-item {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with logo and navigation -->
+    <div class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img class="logo-img" src="https://impro.usercontent.one/appid/oneComWsb/domain/husgruppenbyggteknik.se/media/husgruppenbyggteknik.se/onewebmedia/%C3%84ndrad%20logga%20med%20mindre%20marginal%20h%C3%B6g%20uppl%C3%B6sning%20vit%20text.png?etag=%224e06-64524ef3%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=258%2B206">
+            </div>
+            
+            <div class="nav-menu">
+                <a href="#" class="nav-item">HOME</a>
+                <a href="#" class="nav-item">RANGE AND PRICES <span class="dropdown-icon">▼</span></a>
+                <a href="#" class="nav-item active">CALCULATOR</a>
+                <a href="#" class="nav-item">VACANCIES</a>
+                <a href="#" class="nav-item">CONTACT</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Our Construction Cost Estimator</h1>
+        <p class="intro-text">Estimate the cost of your construction project by entering the details below. Our calculator will provides best estimates based on your specific requirements.</p>
+        
+        <div class="feature-grid">
+            <div class="feature-item">
+                <img src="https://images.ctfassets.net/tjnj6enyzr6b/4Xni8l83e5DFdiyEvfWEJE/851f49a790c4a9dca2a0047a7ecfad15/LD9_RAP_t2.jpg?w=1200&h=678&q=50" alt="Wall Area Measurement" class="feature-image">
+                <h3>Wall Area</h3>
+                <p>The total area of exterior walls in square meters. This includes all vertical surfaces excluding windows and doors.</p>
+            </div>
+            
+            <div class="feature-item">
+                <img src="https://www.thehomehacksdiy.com/wp-content/uploads/2022/09/Double-Hung-Windows.jpg" alt="Windows Greater Than 18-inch Height" class="feature-image">
+                <h3>Windows &gt; 18" Height</h3>
+                <p>Count of windows that exceed 18 inches in height. These larger windows affect structural requirements.</p>
+            </div>
+            
+            <div class="feature-item">
+                <img src="https://cdn.shopify.com/s/files/1/0621/2472/0359/products/3_1_2.jpg?v=1655382809" alt="Sliding Doors" class="feature-image">
+                <h3>Sliding Doors</h3>
+                <p>Number of sliding doors in your design. These require special framing and affect wall structure.</p>
+            </div>
+            
+            <div class="feature-item">
+                <img src="https://www.windowworldsouthernnevada.com/uploads/article_images/WW_2019_CLT-Shoot_House5_brick-FrontDoor-1200x800-5b2df79.jpg" alt="Standard Doors" class="feature-image">
+                <h3>Standard Doors</h3>
+                <p>Total count of standard hinged doors. Each door requires specific framing in the wall structure.</p>
+            </div>
+            
+            <div class="feature-item">
+                <img src="https://images.pexels.com/photos/749231/pexels-photo-749231.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Snow Zone Map" class="feature-image">
+                <h3>Snow Zone</h3>
+                <p>Geographic snow load classification that affects roof design requirements. Higher zones need stronger structures.</p>
+            </div>
+        </div>
+        
+        <h2>Calculate Your Own Cost Now!</h2>
+            <div id="result"></div>
+        
+        <div class="form-container">
+        <div class="form-group">
+            <label for="wall_area">Wall Area (m²):</label>
+            <input type="number" id="wall_area" name="wall_area" min="0" step="0.01" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="windows_gre18">Number of Windows Greater Than 18" Height:</label>
+            <input type="number" id="windows_gre18" name="windows_gre18" min="0" step="1" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="sliding_doors">Number of Sliding Doors:</label>
+            <input type="number" id="sliding_doors" name="sliding_doors" min="0" step="1" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="doors">Number of Doors:</label>
+            <input type="number" id="doors" name="doors" min="0" step="1" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="snow_zone">Snow Zone:</label>
+            <select id="snow_zone" name="snow_zone" required>
+                <option value="">Select Snow Zone</option>
+                <option value="0">Zone 0 (No snow)</option>
+                <option value="1">Zone 1 (Light snow)</option>
+                <option value="2">Zone 2 (Moderate snow)</option>
+                <option value="2.5">Zone 2.5 (Heavy snow)</option>
+            </select>
+        </div>
+        
+        <button onclick="predictCost()">Calculate Cost</button>
+    </div>
+    
+    
+    </div>
+    
+    <script>
+        function predictCost() {
+            // Get input values
+            const wallArea = parseFloat(document.getElementById('wall_area').value) || 0;
+            const windowsGre18 = parseInt(document.getElementById('windows_gre18').value) || 0;
+            const slidingDoors = parseInt(document.getElementById('sliding_doors').value) || 0;
+            const doors = parseInt(document.getElementById('doors').value) || 0;
+            const snowZone = parseInt(document.getElementById('snow_zone').value) || 0;
+            
+            // Validate inputs
+            if (wallArea <= 0 || isNaN(windowsGre18) || isNaN(slidingDoors) || 
+                isNaN(doors) || isNaN(snowZone)) {
+                alert("Please fill in all fields with valid values");
+                return;
+            }
+            
+            // Create input array
+            const x = [wallArea, windowsGre18, slidingDoors, doors, snowZone];
+            
+            // Apply the prediction function
+            const costPrediction = staticPredictY(x);
+
+            // Format the cost with Swedish currency formatting
+            const formattedCost = costPrediction.toLocaleString('sv-SE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+            // Display the result
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<strong>Estimated Cost:</strong> SEK ${formattedCost}`;
+            resultDiv.classList.add('result-visible');
+        }
+        
+        function staticPredictY(x) {
+            // Implementation of the provided Python function
+            const trueWeights = [3277.715966626689, 25925.539269121986, 147516.028858334, 86298.33015425023, 247677.77297942212];
+            const trueBias = -517289.48571098386;
+            
+            // Calculate dot product of x and weights
+            let dotProduct = 0;
+            for (let i = 0; i < x.length; i++) {
+                dotProduct += x[i] * trueWeights[i];
+            }
+            
+            // Calculate prediction
+            const yPred = dotProduct + trueBias;
+            return yPred;
+        }
+    </script>
+</body>
+</html>
