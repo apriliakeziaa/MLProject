@@ -29,4 +29,9 @@ We experimented with multiple algorithms including Linear Regression, Multilayer
 ## Results and Evaluation
 Linear Regression emerged as the best-performing model, providing a balance of accuracy and interpretability for construction cost estimation. **We evaluated the model using R-squared and Mean Absolute Error (MAE) metrics, achieving 81.82% of predictions within the calculated confidence interval.** For an interactive demonstration of the model's performance across different building specifications, you can download and open [Demo.html](https://github.com/apriliakeziaa/MLProject/blob/main/Demo.html) to see the estimator in action.
 
-
+## Contributors:
+-Eduardo Pereira
+-Kezia Aprilia Sanjaya
+-Juan Carlos Gonzalez
+-M. Malik
+-Julian Emery
