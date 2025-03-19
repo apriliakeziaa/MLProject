@@ -12,4 +12,5 @@ The model uses historical construction data from Husgruppen's previous projects.
 - Door quantities (standard and sliding)
 - Snow zone classification
 - Delivery and mounting information
+
 Note: The actual dataset cannot be shared publicly as it contains confidential business information.
